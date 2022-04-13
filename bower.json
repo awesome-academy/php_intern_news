@@ -1,0 +1,20 @@
+{
+  "name": "php_intern_news",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Nguyen Ngoc Cong <ngoccong.nncpro@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nncpro/php_intern_news",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "demo-lightdashboard-nnc": "https://github.com/nncpro/light_dashboard.git"
+  }
+}

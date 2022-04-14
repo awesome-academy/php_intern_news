@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "demo-lightdashboard-nnc": "https://github.com/nncpro/light_dashboard.git"
+    "demo-lightdashboard-nnc": "https://github.com/nncpro/light_dashboard.git",
+    "magz-master-theme": "https://github.com/nncpro/mag-master-theme.git"
   }
 }

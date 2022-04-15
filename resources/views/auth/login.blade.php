@@ -11,7 +11,7 @@
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="form-group @error('email') has-error @enderror">
-                                <label>{{ __('Email') }}</label>
+                                <label>{{ __('Email or Username') }}</label>
                                 <input type="text" name="email" class="form-control rounded" autocomplete="email"
                                     value="{{ old('email') }}">
                                 @error('email')

@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         $this->attributes['username'] = Str::slug($username);
     }
+
+    public function isActive()
+    {
+        return $this->status == self::ACTIVE;
+    }
 }

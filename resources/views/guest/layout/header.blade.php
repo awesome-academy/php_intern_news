@@ -32,10 +32,10 @@
                     @endauth
                     @guest
                         <ul class="nav-icons">
-                            <li><a href="register.html"><i class="ion-person-add"></i>
+                            <li><a href="{{ route('register') }}"><i class="ion-person-add"></i>
                                     <div>{{ __('Register') }}</div>
                                 </a></li>
-                            <li><a href="login.html"><i class="ion-person"></i>
+                            <li><a href="{{ route('login') }}"><i class="ion-person"></i>
                                     <div>{{ __('Login') }}</div>
                                 </a></li>
                         </ul>
@@ -63,8 +63,8 @@
             <div id="menu-list">
                 <ul class="nav-list">
                     <li class="for-tablet nav-title"><a>{{ __('Menu') }}</a></li>
-                    <li class="for-tablet"><a href="login.html">{{ __('Login') }}</a></li>
-                    <li class="for-tablet"><a href="register.html">{{ __('Register') }}</a></li>
+                    <li class="for-tablet"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li class="for-tablet"><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     <li><a href="category.html">{{ __('Home') }}</a></li>
                     <li class="dropdown magz-dropdown">
                         <a href="category.html">{{ 'Categories' }}<i class="ion-ios-arrow-right"></i></a>
@@ -90,7 +90,15 @@
                                     class="ion-ios-arrow-right"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="icon ion-person"></i> {{ __('My Account') }}</a></li>
-                                <li><a href="#"><i class="icon ion-heart"></i> {{ __('Manage Articles') }}</a></li>
+
+                                @if (Auth::user()->isActive())
+                                    <li><a href="#"><i class="icon ion-document-text"></i> {{ __('Manage Articles') }}</a></li>
+                                @endif
+
+                                @if (Auth::user()->is_admin)
+                                    <li><a href="#"><i class="icon ion-android-color-palette"></i> {{ __('Dashboard') }}</a></li>
+                                @endif
+
                                 <li class="divider"></li>
                                 <li><a href="#"
                                         onclick="event.preventDefault();document.getElementById('logout').submit()"><i

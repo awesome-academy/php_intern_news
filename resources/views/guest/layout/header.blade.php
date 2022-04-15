@@ -24,14 +24,23 @@
                     </form>
                 </div>
                 <div class="col-md-3 col-sm-12 text-right">
-                    <ul class="nav-icons">
-                        <li><a href="register.html"><i class="ion-person-add"></i>
-                                <div>{{ __('Register') }}</div>
-                            </a></li>
-                        <li><a href="login.html"><i class="ion-person"></i>
-                                <div>{{ __('Login') }}</div>
-                            </a></li>
-                    </ul>
+                    @auth
+                        <div class="nav-icons">
+                            <li><span>{{ __('Hello') }}</span> <span
+                                    class="text-danger bold">{{ Auth::user()->name }}</span></li>
+                        </div>
+                    @endauth
+                    @guest
+                        <ul class="nav-icons">
+                            <li><a href="register.html"><i class="ion-person-add"></i>
+                                    <div>{{ __('Register') }}</div>
+                                </a></li>
+                            <li><a href="login.html"><i class="ion-person"></i>
+                                    <div>{{ __('Login') }}</div>
+                                </a></li>
+                        </ul>
+                    @endguest
+
                 </div>
             </div>
         </div>
@@ -76,15 +85,22 @@
                             <li><a href="category.html">{{ __('Contact') }}</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown magz-dropdown"><a href="#">{{ __('Personal') }} <i
-                                class="ion-ios-arrow-right"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon ion-person"></i> {{ __('My Account') }}</a></li>
-                            <li><a href="#"><i class="icon ion-heart"></i> {{ __('Manage Articles') }}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="icon ion-log-out"></i> {{ __('Logout') }}</a></li>
-                        </ul>
-                    </li>
+                    @auth
+                        <li class="dropdown magz-dropdown"><a href="#">{{ __('Personal') }} <i
+                                    class="ion-ios-arrow-right"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="icon ion-person"></i> {{ __('My Account') }}</a></li>
+                                <li><a href="#"><i class="icon ion-heart"></i> {{ __('Manage Articles') }}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"
+                                        onclick="event.preventDefault();document.getElementById('logout').submit()"><i
+                                            class="icon ion-log-out"></i> {{ __('Logout') }}</a></li>
+                                <form action="{{ route('logout') }}" id="logout" method="post">
+                                    @csrf
+                                </form>
+                            </ul>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>

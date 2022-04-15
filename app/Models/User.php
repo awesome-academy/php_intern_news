@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Scopes\UserStatusScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -15,7 +17,7 @@ class User extends Authenticatable
     const ACTIVE = 2;
     const BANNED = 3;
     const INACTIVE = 4;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -38,6 +40,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected static function booted()
+    {
+        static::addGlobalScope(new UserStatusScope);
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -50,5 +57,10 @@ class User extends Authenticatable
     public function setPasswordAttribute($plain_password)
     {
         $this->attributes['password'] = Hash::make($plain_password);
+    }
+
+    public function setUsernameAttribute($username)
+    {
+        $this->attributes['username'] = Str::slug($username);
     }
 }

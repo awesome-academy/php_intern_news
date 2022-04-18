@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->status == self::ACTIVE;
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id', 'id');
+    }
 }

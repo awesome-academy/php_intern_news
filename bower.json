@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "demo-lightdashboard-nnc": "https://github.com/nncpro/light_dashboard.git",
-    "magz-master-theme": "https://github.com/nncpro/mag-master-theme.git"
+    "magz-master-theme": "https://github.com/nncpro/mag-master-theme.git",
+    "summernote": "^0.8.20"
   }
 }

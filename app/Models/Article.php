@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Article extends Model
@@ -69,7 +70,12 @@ class Article extends Model
 
         return $status;
     }
-    
+
+    public function existImage()
+    {
+        return Storage::disk('public')->exists($this->cover_image);
+    }
+
     public function getExcerpAttribute()
     {
         //xử lý lấy đoạn trích của nội dung - later

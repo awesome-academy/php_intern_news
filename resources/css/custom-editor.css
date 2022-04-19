@@ -19,3 +19,8 @@
 .categories-list label {
     color: gray
 }
+
+form img{
+    display: block;
+    width: 300px;
+}

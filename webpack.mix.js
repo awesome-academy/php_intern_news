@@ -13,3 +13,9 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+//custom
+mix.js('resources/js/editor.js', 'public/js')
+    .styles([
+        'resources/css/custom-editor.css',
+    ], 'public/css/style.css')

@@ -1,0 +1,21 @@
+.note-editor.note-frame.fullscreen,
+.note-editor.note-airframe.fullscreen {
+    z-index: 2000 !important;
+    background-color: white;
+}
+
+.modal {
+    z-index: 2000 !important;
+}
+
+.categories-list ul li {
+    list-style-type: none;
+}
+
+.categories-list input {
+    margin-right: 10px;
+}
+
+.categories-list label {
+    color: gray
+}

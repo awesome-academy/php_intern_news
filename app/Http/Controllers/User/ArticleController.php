@@ -4,10 +4,14 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use App\Repositories\Article\ArticleRepository;
 use App\Repositories\Article\ArticleRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -76,10 +80,10 @@ class ArticleController extends Controller
             //thêm category
             $article->categories()->attach($request->input('categories'));
 
-            return redirect()->route('user.article.index')->with('success', __('Create article successfully'));
-        } else {
-            return back()->with('error', __('Something went wrong'));
+            return redirect()->route('user.articles.index')->with('success', __('Create article successfully'));
         }
+
+        return back()->with('error', __('Something went wrong'));
     }
 
     /**
@@ -101,7 +105,19 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = $this->articleRepository->getArticle($id);
+        if (Gate::allows('retrieve-article', $article)) {
+            $categories = $this->categoryRepository->getCategoryList();
+            $articleCategories = $article->categories;
+
+            return view('user.article.edit', compact(
+                'article',
+                'categories',
+                'articleCategories'
+            ));
+        }
+
+        return back()->with('error', __("You're not allow to retrieve this article"));
     }
 
     /**
@@ -111,9 +127,32 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateArticleRequest $request, $id)
     {
-        //
+        $article = $this->articleRepository->getArticle($id);
+        if (Gate::allows('retrieve-article', $article)) {
+            $options = $request->only('title', 'content');
+
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('/images/articles/', 'public');
+                if ($path) {
+                    $options['cover_image'] = $path;
+                }
+
+                if ($article->existImage()) {
+                    Storage::disk('public')->delete($article->cover_image);
+                }
+            }
+            if ($article->update($options)) {
+                $article->categories()->sync($request->input('categories'));
+
+                return back()->with('success', __('Update successfully'));
+            }
+
+            return back()->with('error', __("Update failed"));
+        }
+
+        return back()->with('error', __("You're not allow to retrieve this article"));
     }
 
     /**
@@ -125,5 +164,20 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         //
+        $article = $this->articleRepository->getArticle($id);
+
+        if (Gate::allows('retrieve-article', $article)) {
+            $imagePath = $article->cover_image;
+            $article->categories()->detach();
+            if ($article->delete()) {
+                if (Storage::disk('public')->exists($imagePath)) {
+                    Storage::disk('public')->delete($imagePath);
+                }
+
+                return redirect()->route('user.articles.index')->with('success', __('Delete successfully'));
+            }
+        }
+
+        return back()->with('error', __("You're not allow to retrieve this article"));
     }
 }

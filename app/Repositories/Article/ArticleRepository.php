@@ -11,4 +11,9 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         return Auth::user()->articles()->create($options);
     }
+
+    public function getArticle($id)
+    {
+        return Article::findOrFail($id);
+    }
 }

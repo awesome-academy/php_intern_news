@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Repositories\Article\ArticleRepository;
 use App\Repositories\Article\ArticleRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
@@ -29,6 +30,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //share to all view
+        view()->composer('guest.layout.master', function ($view) {
+            $categories = Category::with('subCategories')
+                ->where('parent_id', 0)->get();
+            $view->with('categories', $categories);
+        });
         //define gate for article
         Gate::define('retrieve-article', function ($user, $article) {
             return $user->id == $article->author_id;

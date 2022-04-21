@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\User\ArticleController;
+use App\Http\Controllers\ArticleController as GuestArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +21,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::prefix('user')
     ->name('user.')
     ->middleware('auth')
     ->group(function () {
         Route::resource('articles', User\ArticleController::class);
     });
+
+//guest
+Route::name('guest.')->group(function () {
+    //view article
+    Route::get('/articles/{slug}', [GuestArticleController::class, 'show'])->name('articles.show');
+});

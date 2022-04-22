@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Rules\UniqueSlug;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreArticleRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +25,11 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:255', 'unique:articles,title', new UniqueSlug('articles')],
-            'image.*' => ['mimes:png,jpg', 'image']
+            'name' => [
+                'required',
+                'max:255', 'unique:categories,name,' . $this->id ?? 0,
+                new UniqueSlug('categories', $this->id ?? 0)
+            ]
         ];
     }
 }

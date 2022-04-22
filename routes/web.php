@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController as GuestArticleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,12 @@ Route::name('guest.')->group(function () {
     //view article
     Route::get('/articles/{slug}', [GuestArticleController::class, 'show'])->name('articles.show');
 });
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware('check_admin')
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::resource('categories', Admin\CategoryController::class)
+            ->except(['show', 'create']);
+    });

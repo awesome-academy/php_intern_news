@@ -23,6 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categoryList = $this->categoryRepository->getAllCategories();
+        
         return view('admin.category.index', compact('categoryList'));
     }
 

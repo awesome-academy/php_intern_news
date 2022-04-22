@@ -31,7 +31,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //share to all view
-        view()->composer('guest.layout.master', function ($view) {
+        view()->composer([
+            'guest.layout.master',
+            'admin.category.index',
+            'admin.category.edit'
+        ], function ($view) {
             $categories = Category::with('subCategories')
                 ->where('parent_id', 0)->get();
             $view->with('categories', $categories);

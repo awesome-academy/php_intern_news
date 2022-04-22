@@ -2,20 +2,23 @@
 
 namespace App\Rules;
 
-use App\Models\Article;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class UniqueSlug implements Rule
 {
+    protected $table;
+    protected $ignoreId;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($table, $ignoreId = 0)
     {
-        //
+        $this->table = $table;
+        $this->ignoreId = $ignoreId;
     }
 
     /**
@@ -27,7 +30,10 @@ class UniqueSlug implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Article::where('slug', Str::slug($value))->count() == 0;
+        return DB::table($this->table)
+            ->where('slug', Str::slug($value))
+            ->where('id', '!=', $this->ignoreId)
+            ->count() == 0;
     }
 
     /**

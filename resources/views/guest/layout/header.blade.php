@@ -69,13 +69,17 @@
                     <li class="dropdown magz-dropdown">
                         <a href="category.html">{{ 'Categories' }}<i class="ion-ios-arrow-right"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="index.html">{{ __('Category') }}</a></li>
-                            <li class="dropdown magz-dropdown">
-                                <a href="#">{{ __('Category') }}<i class="ion-ios-arrow-right"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="403.html">{{ __('Sub Category') }}</a></li>
-                                </ul>
-                            </li>
+                            @foreach ($categories as $category)
+                                <li class="dropdown magz-dropdown">
+                                    <a href="#">{{ $category->name }} @if (count($category->subCategories) > 0)
+                                            <i class="ion-ios-arrow-right"></i>
+                                        @endif
+                                    </a>
+                                    @includeWhen(count($category->subCategories) > 0, 'guest.layout.sub-category', [
+                                        'categories' => $category->subCategories,
+                                    ])
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="dropdown magz-dropdown"><a href="#"> {{ __('Pages') }} <i
@@ -92,11 +96,13 @@
                                 <li><a href="#"><i class="icon ion-person"></i> {{ __('My Account') }}</a></li>
 
                                 @if (Auth::user()->isActive())
-                                    <li><a href="#"><i class="icon ion-document-text"></i> {{ __('Manage Articles') }}</a></li>
+                                    <li><a href="#"><i class="icon ion-document-text"></i>
+                                            {{ __('Manage Articles') }}</a></li>
                                 @endif
 
                                 @if (Auth::user()->is_admin)
-                                    <li><a href="#"><i class="icon ion-android-color-palette"></i> {{ __('Dashboard') }}</a></li>
+                                    <li><a href="#"><i class="icon ion-android-color-palette"></i>
+                                            {{ __('Dashboard') }}</a></li>
                                 @endif
 
                                 <li class="divider"></li>

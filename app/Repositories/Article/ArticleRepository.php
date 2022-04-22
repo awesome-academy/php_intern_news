@@ -16,4 +16,30 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         return Article::findOrFail($id);
     }
+
+    public function getArticleBySlug($slug)
+    {
+        $article = Article::with(['author'])->where('slug', $slug)->first();
+
+        if (!$article) {
+            abort(404);
+        }
+
+        return $article;
+    }
+
+    public function getSuggestArticles($ignoreId = 0)
+    {
+        return Article::where('id', '!=', $ignoreId)
+            ->inRandomOrder()
+            ->limit(config('custom.suggest_num'))
+            ->get();
+    }
+
+    public function getRecentArticles()
+    {
+        return Article::orderBy('published_at', 'desc')
+            ->limit(config('custom.recent_num'))
+            ->get();
+    }
 }

@@ -42,4 +42,20 @@ class ArticleRepository implements ArticleRepositoryInterface
             ->limit(config('custom.recent_num'))
             ->get();
     }
+    public function getArticleListAdmin()
+    {
+        return Article::where('published', '!=', config('custom.article_status.no_publish'))
+            ->orderBy('published')->get();
+    }
+
+    public function getArticleAdmin($id)
+    {
+        $article = Article::where('published', '!=', config('custom.article_status.no_publish'))
+            ->where('id', $id)->first();
+        if (!$article) {
+            abort(404);
+        }
+
+        return $article;
+    }
 }

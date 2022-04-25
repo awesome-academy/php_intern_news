@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\ArticleController;
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +51,9 @@ Route::prefix('admin')
 
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::post('/users/{id}', [UserController::class, 'changeStatus'])->name('users.change-status');
+
+        Route::get('/articles', [AdminArticleController::class, 'index'])->name('articles.index');
+        Route::get('/articles/{id}', [AdminArticleController::class, 'show'])->name('articles.show');
+        Route::get('/articles/{id}/{status}', [AdminArticleController::class, 'changeStatus'])
+            ->name('articles.change-status');
     });

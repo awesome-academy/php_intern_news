@@ -13,4 +13,8 @@ interface ArticleRepositoryInterface
     public function getSuggestArticles($ignoreId);
 
     public function getRecentArticles();
+
+    public function getArticleListAdmin();
+
+    public function getArticleAdmin($id);
 }

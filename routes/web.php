@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController as GuestArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::prefix('user')
     ->middleware('auth')
     ->group(function () {
         Route::resource('articles', User\ArticleController::class);
+        Route::post('/articles/{id}/publish', [ArticleController::class, 'requestPublish'])
+            ->name('articles.publish');
     });
 
 //guest

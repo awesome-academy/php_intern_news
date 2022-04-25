@@ -181,4 +181,19 @@ class ArticleController extends Controller
 
         return back()->with('error', __("You're not allow to retrieve this article"));
     }
+
+    public function requestPublish(Request $request, $id)
+    {
+        $article = $this->articleRepository->getArticle($id);
+        $status = $request->input('status');
+
+        if ($status == config('custom.article_status.pending')) {
+            $article->published = $status;
+            $article->save();
+
+            return back()->with('success', __('Request successfully'));
+        }
+
+        return back()->with('error', __('Request failed'));
+    }
 }

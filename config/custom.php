@@ -16,4 +16,10 @@ return [
         'Banned',
         'Inactive'
     ],
+    'article_status' => [
+        'no_publish' => 1,
+        'pending' => 2,
+        'approved' => 3,
+        'rejected' => 4
+    ],
 ];

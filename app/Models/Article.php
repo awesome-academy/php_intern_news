@@ -23,6 +23,11 @@ class Article extends Model
         'author_id',
     ];
 
+    public function scopePublishing($query)
+    {
+        return $query->where('published', config('custom.article_status.approved'));
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id', 'id');

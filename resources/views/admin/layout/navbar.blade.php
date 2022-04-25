@@ -21,12 +21,12 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="">
+                    <a href="{{ route('index') }}">
                         <p>{{ __('Back to News site') }}</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('logout') }}">
                         <p>{{ __('Log out') }}</p>
                     </a>
                 </li>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController as GuestArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,7 @@ Route::prefix('admin')
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::resource('categories', Admin\CategoryController::class)
             ->except(['show', 'create']);
+
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users/{id}', [UserController::class, 'changeStatus'])->name('users.change-status');
     });

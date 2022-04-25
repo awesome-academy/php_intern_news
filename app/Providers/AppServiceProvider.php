@@ -7,6 +7,8 @@ use App\Repositories\Article\ArticleRepository;
 use App\Repositories\Article\ArticleRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ArticleRepositoryInterface::class, ArticleRepository::class);
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
+        $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**

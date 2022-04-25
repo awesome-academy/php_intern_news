@@ -24,6 +24,7 @@ class ArticleController extends Controller
         ArticleRepositoryInterface $articleRepository,
         CategoryRepositoryInterface $categoryRepository
     ) {
+        $this->middleware('check_writer');
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
     }

@@ -19,7 +19,7 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function getArticleBySlug($slug)
     {
-        $article = Article::with(['author'])->where('slug', $slug)->first();
+        $article = Article::publishing()->with(['author'])->where('slug', $slug)->first();
 
         if (!$article) {
             abort(404);
@@ -30,7 +30,7 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function getSuggestArticles($ignoreId = 0)
     {
-        return Article::where('id', '!=', $ignoreId)
+        return Article::publishing()->where('id', '!=', $ignoreId)
             ->inRandomOrder()
             ->limit(config('custom.suggest_num'))
             ->get();
@@ -38,7 +38,7 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function getRecentArticles()
     {
-        return Article::orderBy('published_at', 'desc')
+        return Article::publishing()->orderBy('published_at', 'desc')
             ->limit(config('custom.recent_num'))
             ->get();
     }

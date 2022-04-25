@@ -23,7 +23,7 @@
                     @foreach ($articles as $article)
                         <tr>
                             <td class="text-muted">{{ $article->created_at }}</td>
-                            <td><a href="{{ route('user.articles.show', $article->id) }}">{{ $article->title }}</a>
+                            <td><a href="{{ route('user.articles.edit', $article->id) }}">{{ $article->title }}</a>
                             </td>
                             <td class="text-muted">{{ $article->getCategoriesString() }}</td>
                             <td><span
@@ -34,6 +34,13 @@
                                     title="{{ __('Edit') }}"><i class="ione ion-edit"></i></a>
                                 <a href="#"><i class="ione ion-ios-trash" title="{{ __('Delete') }}"
                                         onclick="event.preventDefault();document.getElementById('delete{{ $article->id }}').submit()"></i></a>
+
+                                @if ($article->published == config('custom.article_status.no_publish'))
+                                    <a href="#" class="btn text-info" title="{{ __('Request publish') }}"
+                                        onclick="event.preventDefault();document.getElementById('publish{{ $article->id }}').submit()">
+                                        <i class="ione ion-earth"></i></a>
+                                @endif
+
                             </td>
                         </tr>
                         <form action="{{ route('user.articles.destroy', $article->id) }}"
@@ -41,6 +48,14 @@
                             @csrf
                             @method('delete')
                         </form>
+
+                        @if ($article->published == config('custom.article_status.no_publish'))
+                            <form id="publish{{ $article->id }}"
+                                action="{{ route('user.articles.publish', $article->id) }}" method="post">
+                                @csrf
+                                <input type="hidden" name="status" value="{{ config('custom.article_status.pending') }}">
+                            </form>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <div class="brand">
-                        <a href="index.html">
+                        <a href="{{ route('index') }}">
                             <img src="{{ asset('bower_components/magz-master-theme/images/logo.png') }}"
                                 alt="Magz Logo">
                         </a>
@@ -50,7 +50,7 @@
     <nav class="menu">
         <div class="container">
             <div class="brand">
-                <a href="#">
+                <a href="{{ route('index') }}">
                     <img src="{{ asset('bower_components/magz-master-theme/images/logo.png') }}" alt="Magz Logo">
                 </a>
             </div>
@@ -65,9 +65,9 @@
                     <li class="for-tablet nav-title"><a>{{ __('Menu') }}</a></li>
                     <li class="for-tablet"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     <li class="for-tablet"><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                    <li><a href="category.html">{{ __('Home') }}</a></li>
+                    <li><a href="{{ route('index') }}">{{ __('Home') }}</a></li>
                     <li class="dropdown magz-dropdown">
-                        <a href="category.html">{{ 'Categories' }}<i class="ion-ios-arrow-right"></i></a>
+                        <a href="#">{{ 'Categories' }}<i class="ion-ios-arrow-right"></i></a>
                         <ul class="dropdown-menu">
                             @foreach ($categories as $category)
                                 <li class="dropdown magz-dropdown">
@@ -85,8 +85,8 @@
                     <li class="dropdown magz-dropdown"><a href="#"> {{ __('Pages') }} <i
                                 class="ion-ios-arrow-right"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="category.html">{{ __('About') }}</a></li>
-                            <li><a href="category.html">{{ __('Contact') }}</a></li>
+                            <li><a href="#">{{ __('About') }}</a></li>
+                            <li><a href="#">{{ __('Contact') }}</a></li>
                         </ul>
                     </li>
                     @auth
@@ -96,12 +96,14 @@
                                 <li><a href="#"><i class="icon ion-person"></i> {{ __('My Account') }}</a></li>
 
                                 @if (Auth::user()->isActive())
-                                    <li><a href="#"><i class="icon ion-document-text"></i>
+                                    <li><a href="{{ route('user.articles.index') }}"><i
+                                                class="icon ion-document-text"></i>
                                             {{ __('Manage Articles') }}</a></li>
                                 @endif
 
                                 @if (Auth::user()->is_admin)
-                                    <li><a href="#"><i class="icon ion-android-color-palette"></i>
+                                    <li><a href="{{ route('admin.index') }}"><i
+                                                class="icon ion-android-color-palette"></i>
                                             {{ __('Dashboard') }}</a></li>
                                 @endif
 

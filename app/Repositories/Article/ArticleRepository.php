@@ -42,6 +42,7 @@ class ArticleRepository implements ArticleRepositoryInterface
             ->limit(config('custom.recent_num'))
             ->get();
     }
+    
     public function getArticleListAdmin()
     {
         return Article::where('published', '!=', config('custom.article_status.no_publish'))
@@ -57,5 +58,10 @@ class ArticleRepository implements ArticleRepositoryInterface
         }
 
         return $article;
+    }
+
+    public function getArticleListGuest()
+    {
+        return Article::publishing()->orderBy('published_at', 'desc')->paginate(config('custom.per-page'));
     }
 }

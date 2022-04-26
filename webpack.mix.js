@@ -21,3 +21,4 @@ mix.js('resources/js/editor.js', 'public/js')
         'resources/css/custom-alert.css',
     ], 'public/css/style.css');
 mix.postCss('resources/css/custom-admin.css', 'public/css');
+mix.postCss('resources/css/font.css', 'public/css')

@@ -11,7 +11,7 @@
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="#" class="simple-text">
-                {{ __('Username') }}
+                {{ Auth::user()->username }}
             </a>
         </div>
 
@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('admin.articles.index') }}">
                     <i class="pe-7s-note2"></i>
                     <p>{{ __('Article Management') }}</p>
                 </a>

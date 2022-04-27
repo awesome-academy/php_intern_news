@@ -59,8 +59,9 @@
                     @endforeach
                 </tbody>
             </table>
-
-            {!! $articles->links() !!}
+            <div class="row text-center">
+                {!! $articles->links('vendor.pagination.custom1') !!}
+            </div>
         </div>
     </section>
 @endsection

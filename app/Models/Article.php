@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserStatusScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,8 @@ class Article extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author_id', 'id');
+        return $this->belongsTo(User::class, 'author_id', 'id')
+            ->withoutGlobalScope(UserStatusScope::class);
     }
 
     public function approver()

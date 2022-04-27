@@ -17,4 +17,6 @@ interface ArticleRepositoryInterface
     public function getArticleListAdmin();
 
     public function getArticleAdmin($id);
+
+    public function getArticleListGuest();
 }

@@ -49,6 +49,7 @@
                             </tbody>
                         </table>
                         <div class="footer">
+                            {!! $articles->links() !!}
                         </div>
                     </div>
 

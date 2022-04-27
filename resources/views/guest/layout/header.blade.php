@@ -93,7 +93,8 @@
                         <li class="dropdown magz-dropdown"><a href="#">{{ __('Personal') }} <i
                                     class="ion-ios-arrow-right"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon ion-person"></i> {{ __('My Account') }}</a></li>
+                                <li><a href="{{ route('user.info') }}"><i class="icon ion-person"></i>
+                                        {{ __('My Account') }}</a></li>
 
                                 @if (Auth::user()->isActive())
                                     <li><a href="{{ route('user.articles.index') }}"><i

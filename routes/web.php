@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\User\UserController as WriterUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::prefix('user')
         Route::resource('articles', User\ArticleController::class);
         Route::post('/articles/{id}/publish', [ArticleController::class, 'requestPublish'])
             ->name('articles.publish');
+        Route::get('/info', [WriterUserController::class, 'info'])->name('info');
+        Route::post('/info', [WriterUserController::class, 'info'])->name('info.change');
+        Route::post('/change-password', [WriterUserController::class, 'info'])->name('change-pass');
     });
 
 //guest

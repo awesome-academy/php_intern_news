@@ -35,7 +35,7 @@ Route::prefix('user')
             ->name('articles.publish');
         Route::get('/info', [WriterUserController::class, 'info'])->name('info');
         Route::post('/info', [WriterUserController::class, 'info'])->name('info.change');
-        Route::post('/change-password', [WriterUserController::class, 'info'])->name('change-pass');
+        Route::post('/change-password', [WriterUserController::class, 'changePassword'])->name('change-pass');
     });
 
 //guest

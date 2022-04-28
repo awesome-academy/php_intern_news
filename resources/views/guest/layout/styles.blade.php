@@ -17,5 +17,4 @@
 <!-- Custom style -->
 <link rel="stylesheet" href="{{ asset('bower_components/magz-master-theme/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('bower_components/magz-master-theme/css/skins/all.css') }}">
-<link rel="stylesheet" href="{{ asset('bower_components/magz-master-theme/css/demo.css') }}">
 <link rel="stylesheet" href="{{ asset('css/font.css') }}">

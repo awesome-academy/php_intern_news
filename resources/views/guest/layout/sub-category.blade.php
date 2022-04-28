@@ -1,7 +1,8 @@
 <ul class="dropdown-menu">
     @foreach ($categories as $category)
-        <li class="dropdown magz-dropdown">
-            <a href="#">{{ $category->name }} @if (count($category->subCategories) > 0)
+        <li class="dropdown">
+            <a href="{{ route('guest.categories.show', $category->slug) }}">{{ $category->name }}
+                @if (count($category->subCategories) > 0)
                     <i class="ion-ios-arrow-right"></i>
                 @endif
             </a>

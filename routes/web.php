@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\User\UserController as WriterUserController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::prefix('user')
 Route::name('guest.')->group(function () {
     //view article
     Route::get('/articles/{slug}', [GuestArticleController::class, 'show'])->name('articles.show');
+    Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 });
 
 Route::prefix('admin')

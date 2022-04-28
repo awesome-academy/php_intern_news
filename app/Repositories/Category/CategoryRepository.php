@@ -24,7 +24,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function getCategoryBySlug($slug)
     {
         $category = Category::where('slug', $slug)->first();
-        if ($category) {
+        if (!$category) {
             abort(404);
         }
 

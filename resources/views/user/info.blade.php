@@ -4,6 +4,7 @@
     <section class="single">
         <div class="container">
             <div class="row">
+                @include('guest.layout.message')
                 <div class="col-md-8 col-sm-8 col-xs-12">
                     <h1 class="h3 text-primary">{{ __('Your personal information') }}</h1>
                     <br>

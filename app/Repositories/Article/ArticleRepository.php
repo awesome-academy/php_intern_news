@@ -46,7 +46,7 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function getArticleListAdmin()
     {
         return Article::where('published', '!=', config('custom.article_status.no_publish'))
-            ->orderBy('published')->get();
+            ->orderBy('published')->paginate(config('custom.per-page'));
     }
 
     public function getArticleAdmin($id)

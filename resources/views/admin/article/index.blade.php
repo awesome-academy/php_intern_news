@@ -48,8 +48,8 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="footer">
-                            {!! $articles->links() !!}
+                        <div class="footer text-center">
+                            {!! $articles->links('vendor.pagination.custom1') !!}
                         </div>
                     </div>
 

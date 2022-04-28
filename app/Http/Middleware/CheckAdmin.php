@@ -20,6 +20,6 @@ class CheckAdmin
             return $next($request);
         }
 
-        return back();
+        return redirect()->route('index');
     }
 }

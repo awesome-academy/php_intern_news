@@ -26,9 +26,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('logout') }}">
+                    <a href="#" onclick="event.preventDefault();document.getElementById('logout').submit()">
                         <p>{{ __('Log out') }}</p>
                     </a>
+
+                    <form id="logout" action="{{ route('logout') }}" method="post">
+                        @csrf
+                    </form>
                 </li>
                 <li class="separator hidden-lg"></li>
             </ul>

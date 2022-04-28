@@ -47,6 +47,9 @@
                     </div>
                 @endforeach
             </div>
+            <div class="row text-center">
+                {!! $articleList->links('vendor.pagination.custom1') !!}
+            </div>
         </div>
     </section>
     <section></section>

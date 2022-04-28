@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categoryList = $this->categoryRepository->getAllCategories();
-        
+
         return view('admin.category.index', compact('categoryList'));
     }
 
@@ -111,6 +111,10 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->getCategory($id);
         $category->articles()->detach();
+        
+        $parent = $category->parent_id;
+        $category->subCategories()->update(['parent_id' => $parent]);
+
         $category->delete();
 
         return redirect()->route('admin.categories.index')->with('success', __('Deleted successfully'));

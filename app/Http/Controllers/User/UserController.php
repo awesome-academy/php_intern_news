@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangeInfoRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -19,8 +21,26 @@ class UserController extends Controller
         return view('user.info', compact('user'));
     }
 
-    public function changeInfo(Request $request)
+    public function changeInfo(ChangeInfoRequest $request)
     {
+        $user = Auth::user();
+        $options = $request->only('name');
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('/images/articles/', 'public');
+            if ($path) {
+                $options['avatar'] = $path;
+            }
+
+            if (Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+        }
+
+        if ($user->update($options)) {
+            return back()->with('success', __('Updated successfully'));
+        }
+
+        return back()->with('error', __('Update failed'));
     }
 
     public function changePassword(PasswordRequest $request)

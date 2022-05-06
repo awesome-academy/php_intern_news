@@ -35,7 +35,7 @@ Route::prefix('user')
         Route::post('/articles/{id}/publish', [ArticleController::class, 'requestPublish'])
             ->name('articles.publish');
         Route::get('/info', [WriterUserController::class, 'info'])->name('info');
-        Route::post('/info', [WriterUserController::class, 'info'])->name('info.change');
+        Route::post('/info', [WriterUserController::class, 'changeInfo'])->name('info.change');
         Route::post('/change-password', [WriterUserController::class, 'changePassword'])->name('change-pass');
     });
 

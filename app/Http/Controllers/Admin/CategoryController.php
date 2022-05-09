@@ -98,7 +98,7 @@ class CategoryController extends Controller
             return back()->with('success', __('Updated successfully'));
         }
 
-        return back()->with('Update failed');
+        return back()->with('error', 'Update failed');
     }
 
     /**
@@ -111,7 +111,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->getCategory($id);
         $category->articles()->detach();
-        
+
         $parent = $category->parent_id;
         $category->subCategories()->update(['parent_id' => $parent]);
 

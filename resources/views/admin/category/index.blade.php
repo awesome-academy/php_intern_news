@@ -42,7 +42,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                    <button type="submit" id="btn-save" class="btn btn-primary">{{ __('Save') }}</button>
                                 </form>
                             </div>
                         </div>
@@ -62,9 +62,10 @@
                                         <td>{{ $category->slug }}</td>
                                         <td>{{ $category->category->name ?? '' }}</td>
                                         <td>
-                                            <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                            <a id="btn-edit-{{ $category->id }}"
+                                                href="{{ route('admin.categories.edit', $category->id) }}"
                                                 class="btn btn-primary">{{ __('Edit') }}</a>
-                                            <a href="#"
+                                            <a id="btn-delete-{{ $category->id }}" href="#"
                                                 onclick="event.preventDefault();document.getElementById('delete{{ $category->id }}').submit()"
                                                 class="btn btn-danger">{{ __('Delete') }}</a>
                                         </td>

@@ -17,25 +17,25 @@
 
         <ul class="nav">
             <li class="active">
-                <a href="{{ route('admin.index') }}">
+                <a id="l-dashboard" href="{{ route('admin.index') }}">
                     <i class="pe-7s-graph"></i>
                     <p>{{ __('Dashboard') }}</p>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.users.index') }}">
+                <a id="l-writer" href="{{ route('admin.users.index') }}">
                     <i class="pe-7s-user"></i>
                     <p>{{ __('Writer Management') }}</p>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.articles.index') }}">
+                <a id="l-article" href="{{ route('admin.articles.index') }}">
                     <i class="pe-7s-note2"></i>
                     <p>{{ __('Article Management') }}</p>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.categories.index') }}">
+                <a id="l-category" href="{{ route('admin.categories.index') }}">
                     <i class="pe-7s-science"></i>
                     <p>{{ __('Category Management') }}</p>
                 </a>

@@ -24,4 +24,12 @@ class ArticleController extends Controller
 
         return view('guest.article.show', compact('article', 'suggests', 'recents'));
     }
+
+    public function search()
+    {
+        $query = request()->query('q');
+        $articleList = $this->articleRepository->getArticleListGuest();
+        
+        return view('guest.article.search', compact('articleList', 'query'));
+    }
 }

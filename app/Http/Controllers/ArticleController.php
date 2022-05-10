@@ -28,7 +28,8 @@ class ArticleController extends Controller
     public function search()
     {
         $query = request()->query('q');
-        $articleList = $this->articleRepository->getArticleListGuest();
+        $articleList = $this->articleRepository->getSearchArticles($query);
+        $articleList->appends(['q' => $query]);
         
         return view('guest.article.search', compact('articleList', 'query'));
     }

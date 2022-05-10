@@ -137,6 +137,6 @@ class ArticleTest extends TestCase
 
     public function testLocalScope()
     {
-        assertInstanceOf(Builder::class, Article::publishing());
+        $this->assertInstanceOf(Builder::class, Article::publishing());
     }
 }

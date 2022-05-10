@@ -43,6 +43,7 @@ Route::prefix('user')
 Route::name('guest.')->group(function () {
     //view article
     Route::get('/articles/{slug}', [GuestArticleController::class, 'show'])->name('articles.show');
+    Route::get('/articles', [GuestArticleController::class, 'search'])->name('articles.search');
     Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 });
 

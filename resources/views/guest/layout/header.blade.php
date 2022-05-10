@@ -11,13 +11,15 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                    <form class="search" autocomplete="off">
+                    <form class="search" method="GET" action="{{ route('guest.articles.search') }}"
+                        autocomplete="off">
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" name="q" class="form-control"
-                                    placeholder="{{ __('Type something here') }}">
+                                    placeholder="{{ __('Type something here') }}" value="{{ $query ?? '' }}">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-primary"><i class="ion-search"></i></button>
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="ion-search"></i></button>
                                 </div>
                             </div>
                         </div>

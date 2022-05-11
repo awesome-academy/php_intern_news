@@ -21,12 +21,12 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="{{ route('index') }}">
+                    <a id="btn-news-site" href="{{ route('index') }}">
                         <p>{{ __('Back to News site') }}</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" onclick="event.preventDefault();document.getElementById('logout').submit()">
+                    <a id="btn-logout" href="#" onclick="event.preventDefault();document.getElementById('logout').submit()">
                         <p>{{ __('Log out') }}</p>
                     </a>
 

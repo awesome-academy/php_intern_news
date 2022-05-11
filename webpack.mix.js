@@ -21,5 +21,7 @@ mix.js('resources/js/editor.js', 'public/js')
         'resources/css/custom-alert.css',
     ], 'public/css/style.css');
 mix.js('resources/js/statistic-chart.js', 'public/js');
+mix.js('resources/js/notification.js', 'public/js');
 mix.postCss('resources/css/custom-admin.css', 'public/css');
 mix.postCss('resources/css/font.css', 'public/css')
+mix.postCss('resources/css/custom-notification.css', 'public/css')

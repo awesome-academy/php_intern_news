@@ -37,6 +37,11 @@ Route::prefix('user')
         Route::get('/info', [WriterUserController::class, 'info'])->name('info');
         Route::post('/info', [WriterUserController::class, 'changeInfo'])->name('info.change');
         Route::post('/change-password', [WriterUserController::class, 'changePassword'])->name('change-pass');
+
+        Route::post('/notifications/{id}', [WriterUserController::class, 'markReadNotification'])
+            ->name('notification.read');
+        Route::post('/notifications', [WriterUserController::class, 'markReadAllNotification'])
+            ->name('notification.readAll');
     });
 
 //guest

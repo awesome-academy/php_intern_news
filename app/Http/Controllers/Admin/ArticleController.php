@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PublishNotificationEvent;
 use App\Http\Controllers\Controller;
+use App\Notifications\PublishNotification;
 use App\Repositories\Article\ArticleRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,6 +48,22 @@ class ArticleController extends Controller
 
             $article->approved_by = Auth::user()->id;
             $article->save();
+
+            $data = [
+                'message' => __('The article :title has been :status', [
+                    'title' => $article->title,
+                    'status' => __(config('custom.article_status_text')[$article->published])
+                ]),
+                'created_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            $user = $article->author;
+
+            $user->notify(new PublishNotification($data));
+            $notification_id = $user->notifications->first()->id;
+            $data['notification_id'] = $notification_id;
+
+            event(new PublishNotificationEvent($data, $user->id));
 
             return back()->with('success', __('Changed successfully'));
         }

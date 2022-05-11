@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangeInfoRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Repositories\User\UserRepositoryInterface;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -51,5 +52,27 @@ class UserController extends Controller
         $user->update(['password' => $pass]);
 
         return back()->with('success', __('Changed password successfully'));
+    }
+
+    public function markReadNotification($id)
+    {
+        try {
+            Auth::user()->Notifications->find($id)->markAsRead();
+        } catch (Exception $ex) {
+            return response()->json(['message' => $ex], 500);
+        }
+
+        return response()->json(['message' => 'success'], 200);
+    }
+
+    public function markReadAllNotification()
+    {
+        try {
+            Auth::user()->Notifications->markAsRead();
+        } catch (Exception $ex) {
+            return response()->json(['message' => $ex], 500);
+        }
+
+        return response()->json(['message' => 'success'], 200);
     }
 }

@@ -24,14 +24,14 @@ jobs:
       - vendor
   before_script:
   - cp .env.example .env.testing
-  - composer install
+  - composer install --ignore-platform-reqs
   - php artisan key:generate
   - php artisan migrate
   - php artisan config:cache
   - php artisan config:clear
   - php artisan cache:clear
   script:
-  - composer install
+  - composer install --ignore-platform-reqs
   after_script:
   - echo "Finish job"
 
@@ -51,7 +51,7 @@ jobs:
   image: sunasteriskrnd/php-workspace:7.4
   before_script:
   - composer global require "squizlabs/php_codesniffer=*"
-  - composer install
+  - composer install --ignore-platform-reqs
   script:
   - ~/.composer/vendor/bin/phpcs --ignore=vendor,bootstrap/cache/,storage,database,coverage,public,resources,node_modules --standard=PSR2,PSR1 ./
   - ~/.composer/vendor/bin/phpcs --standard=PSR2,PSR1 resources/lang
@@ -60,7 +60,7 @@ jobs:
   stage: test
   image: sunasteriskrnd/php-workspace:7.4
   before_script:
-  - composer install
+  - composer install --ignore-platform-reqs
   script:
     - vendor/bin/phpunit --coverage-clover ./coverage.xml --coverage-html=coverage
   coverage:

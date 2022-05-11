@@ -145,7 +145,9 @@ class ArticleController extends Controller
                 }
             }
             if ($article->update($options)) {
+                $article->published = config('custom.article_status.no_publish');
                 $article->categories()->sync($request->input('categories'));
+                $article->save();
 
                 return back()->with('success', __('Update successfully'));
             }

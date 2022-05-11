@@ -3,6 +3,7 @@
 namespace App\Repositories\Article;
 
 use App\Models\Article;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleRepository implements ArticleRepositoryInterface
@@ -71,5 +72,23 @@ class ArticleRepository implements ArticleRepositoryInterface
             ->where('title', 'like', '%' . $query . '%')
             ->orderByDesc('published_at')
             ->paginate(config('custom.per-page'));
+    }
+
+    public function getStatistic()
+    {
+        $year = Carbon::now()->year;
+        $postList = Article::where('created_at', 'like', "%" . $year . "%")
+            ->where('published', Article::APPROVED)
+            ->get();
+
+        $months = $postList->map(function ($post, $index) {
+            return $post->created_at->format('M');
+        });
+
+        $initChart = config('init-chart.data');
+
+        $result = json_encode(array_merge($initChart, array_count_values($months->toArray())));
+
+        return $result;
     }
 }

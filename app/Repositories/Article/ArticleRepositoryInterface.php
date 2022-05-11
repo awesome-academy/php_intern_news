@@ -21,4 +21,6 @@ interface ArticleRepositoryInterface
     public function getArticleListGuest();
 
     public function getSearchArticles($query);
+
+    public function getStatistic();
 }

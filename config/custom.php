@@ -22,4 +22,10 @@ return [
         'approved' => 3,
         'rejected' => 4
     ],
+    'article_status_text' => [
+        1 => 'No publish',
+        2 => 'Pending',
+        3 => 'Approved',
+        4 => 'Rejected'
+    ]
 ];

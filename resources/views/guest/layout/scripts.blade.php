@@ -14,3 +14,11 @@ src="{{ asset('bower_components/magz-master-theme/scripts/magnific-popup/dist/jq
 <script src="{{ asset('bower_components/magz-master-theme/scripts/sweetalert/dist/sweetalert.min.js') }}"></script>
 <script src="{{ asset('bower_components/magz-master-theme/scripts/toast/jquery.toast.min.js') }}"></script>
 <script src="{{ asset('bower_components/magz-master-theme/js/e-magz.js') }}"></script>
+
+<script>
+    if ({{ Auth::check() }}) {
+        window.user = {{ Auth::id() }};
+    }
+</script>
+
+<script src="{{ asset('js/notification.js') }}"></script>

@@ -23,4 +23,6 @@ interface ArticleRepositoryInterface
     public function getSearchArticles($query);
 
     public function getStatistic();
+
+    public function getPendingArticles();
 }

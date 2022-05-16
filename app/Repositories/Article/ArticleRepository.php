@@ -91,4 +91,12 @@ class ArticleRepository implements ArticleRepositoryInterface
 
         return $result;
     }
+
+    public function getPendingArticles()
+    {
+        return Article::where('published', config('custom.article_status.pending'))
+            ->where('updated_at', '>', Carbon::now()->subMonth())
+            ->latest()
+            ->get();
+    }
 }

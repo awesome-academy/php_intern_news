@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
 
+    protected $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function info()
     {
         $user = Auth::user();
@@ -57,7 +64,7 @@ class UserController extends Controller
     public function markReadNotification($id)
     {
         try {
-            Auth::user()->Notifications->find($id)->markAsRead();
+            $this->userRepository->markReadNotification($id);
         } catch (Exception $ex) {
             return response()->json(['message' => $ex], 500);
         }
@@ -68,7 +75,7 @@ class UserController extends Controller
     public function markReadAllNotification()
     {
         try {
-            Auth::user()->Notifications->markAsRead();
+            $this->userRepository->markReadAllNotifications();
         } catch (Exception $ex) {
             return response()->json(['message' => $ex], 500);
         }

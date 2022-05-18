@@ -9,4 +9,8 @@ interface UserRepositoryInterface
     public function getUser($id);
 
     public function getAdminUsers();
+
+    public function markReadNotification($id);
+
+    public function markReadAllNotifications();
 }

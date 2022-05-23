@@ -114,7 +114,7 @@
                     <li class="for-tablet"><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     <li><a href="{{ route('index') }}">{{ __('Home') }}</a></li>
                     <li class="dropdown magz-dropdown">
-                        <a href="#">{{ 'Categories' }}<i class="ion-ios-arrow-right"></i></a>
+                        <a href="#">{{ __('Categories') }}<i class="ion-ios-arrow-right"></i></a>
                         <ul class="dropdown-menu">
                             @foreach ($categories as $category)
                                 <li class="dropdown">

@@ -13,6 +13,15 @@ const initChart = async function () {
                     backgroundColor: 'orangered',
                 }]
             },
+            options: {
+                scales: {
+                    y: {
+                        ticks: {
+                            stepSize: 1,
+                        }
+                    }
+                }
+            }
         });
     }
 }

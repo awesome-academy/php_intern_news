@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPasswordNotification;
 use App\Scopes\UserStatusScope;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +14,7 @@ use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     use Notifiable;
+    use CanResetPassword;
 
     const PENDING = 1;
     const ACTIVE = 2;
@@ -77,5 +80,10 @@ class User extends Authenticatable
     public function getUnreadNotificationAttribute()
     {
         return $this->Notifications->whereNull('read_at')->count();
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }
